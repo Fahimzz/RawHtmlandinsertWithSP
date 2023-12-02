@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Task</title>
+    <meta property="og:title" content="Task" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css">
+
+    <style data-tag="reset-style-sheet">
+    </style>
+
+    <style data-tag="default-style-sheet">
+    </style>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+          data-tag="font" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Meeting Minutes</h5>
+                        <div class="form-group">
+                            <label class="mr-2">Meeting Type:</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radio" id="corporateRadio">
+                                <label class="form-check-label" for="corporateRadio">Corporate</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radio" id="indiRadio">
+                                <label class="form-check-label" for="indiRadio">Individual</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Customer">Customer Name</label>
+                                    <select id="Customer" class="form-control">
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="datePicker">Date</label>
+                                        <div class="input-group date" id="datepicker" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datepicker" id="datePicker" placeholder="Select date" />
+                                            <div class="input-group-append" data-target="#datepicker" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="timePicker">Time</label>
+                                        <div class="input-group date" id="timepicker" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" id="timePicker" placeholder="Select time" />
+                                            <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meetingplace">Meeting Place:</label>
+                                    <input type="text" placeholder="placeholder" id="meetingplace" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meetingplace">Attendes From Client Side:</label>
+                                    <textarea type="text" placeholder="placeholder" id="clientside" class="form-control"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meetingplace">Attendes From Host Side:</label>
+                                    <textarea type="text" placeholder="placeholder" id="hostSide" class="form-control"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="meetingplace">Meeting Agenda:</label>
+                                    <textarea type="text" placeholder="placeholder" id="meetingAgenda" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="meetingplace">Meeting Discussion:</label>
+                                    <textarea type="text" placeholder="placeholder" id="discussion" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="meetingplace">Meeting Decision:</label>
+                                    <textarea type="text" placeholder="placeholder" id="decision" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h5 class="card-title mb-4">Product/Service</h5>
+
+                            <div class="form-group">
+                                <label for="products">Product/Service:</label>
+                                <select id="products" class="form-control">
+                                    <option value="" selected disabled>Select</option>
+                                    <!-- Product dropdown options will be dynamically populated here -->
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="number" class="form-control" id="quantity">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="unit">Unit:</label>
+                                    <input type="text" class="form-control" id="unit" readonly>
+                                </div>
+                            </div>
+                            <!-- Additional content below the product/service dropdown -->
+                            <button type="button" class="btn btn-primary" id="addButton">Add</button>
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="card-title">Table</h5>
+
+                            <!-- Table to display added rows -->
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>SL#</th>
+                                        <th>Product/Service Name</th>
+                                        <th>Quantity</th>
+                                        <th>Unit</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-success" id="saveButton">Save</button>
+                            <button type="button" class="btn btn-secondary ml-2" id="refreshButton">Refresh</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Product/Service</h5>
+                        <div class="form-group">
+                            <label for="products">Product/Service:</label>
+                            <select id="products" class="form-control">-->
+                                <!-- Product dropdown options will be dynamically populated here -->
+                            <!--</select>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#corporateRadio').prop('checked', true);
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            });
+
+            $('#timepicker').datetimepicker({
+                format: 'LT',
+            });
+
+            getCorporateUserData();
+            getProductAndServices();
+
+        });
+        $('#products').on('change', function () {
+            var selectedProductId = $(this).val();
+
+            if (selectedProductId) {
+                // Fetch product details based on the selected product
+                getProductDetails(selectedProductId);
+            } else {
+                // Clear quantity and unit fields if no product is selected
+                $('#quantity').val('');
+                $('#unit').val('');
+            }
+        });
+        $('#saveButton').on('click', function () {
+            saveData();
+        });
+
+        $('#refreshButton').on('click', function () {
+            location.reload();
+        });
+        $('#addButton').on('click', function () {
+            addTableRow();
+        });
+
+        function saveData() {
+            var products = [];
+            debugger;
+            // Loop through the table rows to gather product data
+            $('#tableBody tr').each(function () {
+                var productName = $(this).find('td:eq(1)').text();
+                var quantity = $(this).find('td:eq(2)').text();
+                var unit = $(this).find('td:eq(3)').text();
+
+                var product = {
+                    ProductName: productName,
+                    Quantity: parseInt(quantity),
+                    Unit: unit
+                };
+
+                products.push(product);
+            });
+
+            var dataToSave = {
+                MeetingType: $('input[name="radio"]:checked').val(),
+                CustomerId: $('#Customer').val(),
+                MeetingDate: $('#datepicker').val(),
+                MeetingTime: $('#timepicker').val(),
+                MeetingPlace: $('#meetingplace').val(),
+                AttendesFromClient: $('#clientside').val(),
+                AttendesFromHost: $('#hostSide').val(),
+                MeetingAgenda: $('#meetingAgenda').val(),
+                MeetingDiscussion: $('#discussion').val(),
+                MeetingDecision: $('#decision').val(),
+
+                // Include the list of products in the data
+                Products: products
+            };
+
+            $.ajax({
+                url: 'https://localhost:7128/Task/saveMeetingData',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(dataToSave),
+                success: function (response) {
+                    // Handle success response
+                    console.log('Data saved successfully:', response);
+                },
+                error: function (error) {
+                    // Handle error response
+                    console.error('Error saving data:', error);
+                }
+            });
+            //$.ajax({
+            //    type: 'POST', // Change to 'POST' or 'PUT' as per your API requirements
+            //    url: 'YOUR_SAVE_API_ENDPOINT', // Replace with your actual API endpoint for saving data
+            //    data: {
+            //        // Include the data you want to save, e.g., $('#tableBody').html()
+            //        // ...
+            //    },
+            //    success: function (response) {
+            //        // Handle the success response from the API
+            //        console.log('Data saved successfully:', response);
+            //    },
+            //    error: function (error) {
+            //        // Handle the error response from the API
+            //        console.error('Error saving data:', error);
+            //    }
+            //});
+        }
+
+        function addTableRow() {
+            var productName = $('#products option:selected').text();
+            var quantity = $('#quantity').val();
+            var unit = $('#unit').val();
+
+            if (productName && quantity && unit) {
+                var tableBody = $('#tableBody');
+                var rowCount = tableBody.children('tr').length + 1;
+
+                // Create a new table row
+                var newRow = $('<tr>');
+                newRow.append($('<td>').text(rowCount));
+                newRow.append($('<td>').text(productName));
+                newRow.append($('<td>').text(quantity));
+                newRow.append($('<td>').text(unit));
+
+                // Add Edit and Delete buttons
+                newRow.append($('<td>').html('<button type="button" class="btn btn-warning btn-sm editBtn">Edit</button>' +
+                    '<button type="button" class="btn btn-danger btn-sm deleteBtn ml-2">Delete</button>'));
+
+                // Append the new row to the table
+                tableBody.append(newRow);
+
+                // Clear input fields after adding the row
+                $('#quantity').val('');
+                $('#unit').val('');
+
+                // Bind click events for edit and delete buttons
+                bindEditDeleteEvents();
+            }
+        }
+
+        // Function to bind click events for Edit and Delete buttons in the table
+        function bindEditDeleteEvents() {
+            $('.editBtn').on('click', function () {
+                // Handle Edit button click
+                // You can implement edit functionality here
+                console.log('Edit button clicked');
+            });
+
+            $('.deleteBtn').on('click', function () {
+                // Handle Delete button click
+                // You can implement delete functionality here
+                $(this).closest('tr').remove();
+                console.log('Delete button clicked');
+            });
+        }
+
+        function getProductDetails(productId) {
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:7128/Task/getProductAndServices/' + productId,
+                headers: {
+                    'accept': 'application/json',
+                },
+                success: function (response) {
+                    console.log('Product details response:', response);
+
+                    // Update quantity and unit fields with the fetched data
+                    if (response && response.value) {
+                        $('#quantity').val(response.value.quantities);
+                        $('#unit').val(response.value.unit);
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching product details:', error);
+                },
+            });
+        }
+        function getCorporateUserData() {
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:7128/Task/getCorporateUser',
+                headers: {
+                    'accept': 'application/json',
+                },
+                success: function (response) {
+                    console.log('Corporate user data response:', response);
+
+                    if (response && response.value) {
+                        var customerDropdown = $('#Customer');
+                        customerDropdown.empty();
+                        $.each(response.value, function (index, user) {
+                            customerDropdown.append($('<option>', {
+                                value: user.id,
+                                text: user.name
+                            }));
+                        });
+                    }
+                },
+                error: function (error) {
+                    //console.error('Error fetching corporate user data:', xhr, status, error);
+                },
+            });
+        }
+
+        function getIndividualUserData() {
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:7128/Task/getIndividualUser',
+                headers: {
+                    'accept': 'application/json',
+                },
+                success: function (response) {
+                    console.log('Individual user data response:', response);
+
+                    if (response && response.value) {
+                        var customerDropdown = $('#Customer');
+                        customerDropdown.empty();
+                        $.each(response.value, function (index, user) {
+                            customerDropdown.append($('<option>', {
+                                value: user.id,
+                                text: user.name
+                            }));
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching individual user data:', error);
+                },
+            });
+        }
+        function getProductAndServices() {
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:7128/Task/getProductAndServices',
+                headers: {
+                    'accept': 'application/json',
+                },
+                success: function (response) {
+                    console.log('Product and Services data response:', response);
+
+                    // Update the Product/Service dropdown with the fetched data
+                    if (response && response.value) {
+                        var productsDropdown = $('#products');
+                        productsDropdown.empty(); // Clear existing options
+
+                        // Add the default "Select" option
+                        productsDropdown.append($('<option>', {
+                            value: '',
+                            text: 'Select',
+                            selected: true,
+                            disabled: true
+                        }));
+
+                        // Populate the actual product options
+                        $.each(response.value, function (index, product) {
+                            productsDropdown.append($('<option>', {
+                                value: product.id,
+                                text: product.name
+                            }));
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching product and services data:', error);
+                },
+            });
+        }
+        $('input[name="radio"]').on('change', function () {
+            debugger;
+            if ($('#corporateRadio').prop('checked')) {
+                getCorporateUserData();
+            } else if ($('#indiRadio').prop('checked')) {
+                getIndividualUserData();
+            }
+        });
+
+
+    </script>
+
+</body>
+</html>
